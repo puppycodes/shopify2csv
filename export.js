@@ -1,22 +1,21 @@
-var request = require('request');
-var fs = require('fs');
-var json2csv = require('json2csv');
-var async = require('async');
-var _ = require('underscore');
-var RateLimiter = require('limiter').RateLimiter;
-var flatten = require('flat');
+const request = require('request');
+const fs = require('fs');
+const json2csv = require('json2csv');
+const async = require('async');
+const _ = require('underscore');
+const RateLimiter = require('limiter').RateLimiter;
+const flatten = require('flat');
+const limiter = new RateLimiter(1, 500);
 
-var limiter = new RateLimiter(1, 500);
+let apikey = '';
+let password = '';
+let shopname = '';
 
-var apikey = '';
-var password = '';
-var shopname = '';
+let baseurl = 'https://'+apikey+':'+password+'@'+shopname+'.myshopify.com';
+let numOrders = 0;
+let ordersList = [];
 
-var baseurl = 'https://'+apikey+':'+password+'@'+shopname+'.myshopify.com';
-var numOrders = 0;
-var ordersList = [];
-
-var getOrders = function(page, callback)
+let getOrders = function(page, callback)
 {
 	request({
 	    url: baseurl+'/admin/orders.json?status=any&limit=250&page='+page,
@@ -25,8 +24,8 @@ var getOrders = function(page, callback)
 
    	if (!error && response.statusCode === 200) {
 
-				var newList = [];
-				for (var i = 0; i < body.orders.length; i++)
+				let newList = [];
+				for (i = 0; i < body.orders.length; i++)
 				{
 					newList.push(flatten(body.orders[i]));
 				}
@@ -51,8 +50,8 @@ request({
 
 	console.log('Total Order Count :'+numOrders);
 	console.log();
-	var numPages = numOrders / 250;
-	var r = _.range(1, numPages+1);
+	let numPages = numOrders / 250;
+	let r = _.range(1, numPages+1);
 
 	async.forEach(r, function(page, callback) {
 		limiter.removeTokens(1, function() {
