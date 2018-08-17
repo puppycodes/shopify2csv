@@ -1,7 +1,7 @@
 {
-  "name": "ExportShopifyOrders",
+  "name": "shopify2csv",
   "version": "1.0.0",
-  "description": "ExportShopifyOrders ===================",
+  "description": "shopify2csv",
   "main": "export.js",
   "dependencies": {
     "async": "^2.6.1",
@@ -14,7 +14,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": ""
   },
   "repository": {
     "type": "git",
@@ -22,7 +22,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/puppycodes/shopify2csv"
   },
