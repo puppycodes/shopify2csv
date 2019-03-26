@@ -5,9 +5,10 @@
   "main": "export.js",
   "dependencies": {
     "async": "^2.6.1",
+    "dotenv": "^7.0.0",
     "flat": "^4.1.0",
-    "limiter": "^1.1.3",
     "json2csv": "3.9.1",
+    "limiter": "^1.1.3",
     "request": "^2.87.0",
     "requirejs": "^2.3.5",
     "underscore": "^1.9.1"
